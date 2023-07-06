@@ -1,0 +1,306 @@
+<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+  <div class="col-12">
+    <div class="card card-w-title">
+      <p-breadcrumb [model]="breadcrumbItems" [home]="{icon: 'pi pi-home'}"></p-breadcrumb>
+    </div>
+  </div>
+  <div class="grid col-12" >
+    <div class="col-12 md:col-6 lg:col-3">
+    <div class="surface-card shadow-2 p-3 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Administartors</span>
+          <div class="text-900 font-medium text-xl">{{ADMINISTRTOR}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width:2.5rem;height:2.5rem">
+          <i class="pi pi-id-card text-red-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">%{{(ADMINISTRTOR/users.length*100) | number:'1.2-2'}}</span>
+      <span class="text-500"> from</span>
+      <span class="text-green-500 font-medium"> {{users.length}}</span>
+      <span class="text-500"> User</span>
+    </div>
+  </div>
+    <div class="col-12 md:col-6 lg:col-3">
+      <div class="surface-card shadow-2 p-3 border-round">
+        <div class="flex justify-content-between mb-3">
+          <div>
+            <span class="block text-500 font-medium mb-3">INSCRIT</span>
+            <div class="text-900 font-medium text-xl">{{INSCRIT}}</div>
+          </div>
+          <div class="flex align-items-center justify-content-center bg-yellow-100 border-round" style="width:2.5rem;height:2.5rem">
+            <i class="pi pi-users text-yellow-500 text-xl"></i>
+          </div>
+        </div>
+        <span class="text-green-500 font-medium">%{{(INSCRIT/users.length*100) | number:'1.2-2'}}</span>
+        <span class="text-500"> from</span>
+        <span class="text-green-500 font-medium"> {{users.length}}</span>
+        <span class="text-500"> User</span>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3">
+    <div class="surface-card shadow-2 p-3 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">VENDEUR</span>
+          <div class="text-900 font-medium text-xl">{{VENDEUR}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
+          <i class="pi pi-tags text-blue-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">%{{(VENDEUR/users.length*100) | number:'1.2-2'}}</span>
+      <span class="text-500"> from</span>
+      <span class="text-green-500 font-medium"> {{users.length}}</span>
+      <span class="text-500"> User</span>
+    </div>
+  </div>
+    <div class="col-12 md:col-6 lg:col-3">
+    <div class="surface-card shadow-2 p-3 border-round">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">ACHETEUR</span>
+          <div class="text-900 font-medium text-xl">{{ACHETEUR}}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-green-100 border-round" style="width:2.5rem;height:2.5rem">
+          <i class="pi pi-shopping-cart text-green-500 text-xl"></i>
+        </div>
+      </div>
+      <span class="text-green-500 font-medium">%{{(ACHETEUR/users.length*100) | number:'1.2-2'}}</span>
+      <span class="text-500"> from</span>
+      <span class="text-green-500 font-medium"> {{users.length}}</span>
+      <span class="text-500"> User</span>
+    </div>
+  </div>
+
+  </div>
+<div class="grid">
+
+<div class="col-12 md:col-6 lg:col-12">
+  <div class="col-12 lg:col-12">
+    <div class="card">
+      <h5>Users by Role Numbers</h5>
+      <a href="{{PDF_urlStatUser}}">Download PDF</a>
+      <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+    </div>
+</div>
+
+  <div class="col-12 md:col-6 lg:col-12">
+  <div class="card px-6 py-6">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+
+          <h5>View Users / Manage Users Data</h5>
+        </div>
+      </div>
+    </div>
+    <div class="my-3">
+      <button type="button" class="btn btn-primary" (click)="AddUser()">Add User</button>
+    </div>
+    <p-table #dt1 [value]="users" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['firstName', 'lastName', 'phoneNumber',   'email', 'Options']" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedUsers" selectionMode="multiple" [rowHover]="true" dataKey="id">
+      <ng-template pTemplate="caption">
+        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+          <h5 class="m-0">Manage Users</h5>
+          <span class="block mt-2 md:mt-0 p-input-icon-left">
+                          <i class="pi pi-search"></i>
+                          <input pInputText type="text" (input)="onGlobalFilter(dt1, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
+                      </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="firstName">FirstName <p-sortIcon field="firstName"></p-sortIcon>
+          <th pSortableColumn="lastName">LastName <p-sortIcon field="lastName"></p-sortIcon>
+          <th pSortableColumn="phoneNumber">PhoneNumber <p-sortIcon field="phoneNumber"></p-sortIcon>
+          <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+          </td>
+          <td style="width:14%; min-width:10rem;">
+            <span class="p-column-title">FirstName</span>
+            {{user.firstName}}
+          </td>
+          <td style="width:14%; min-width:10rem;">
+            <span class="p-column-title">LastName </span>
+            {{user.lastName}}
+          </td>
+          <td style="width:14%%; min-width:10rem;">
+            <span class="p-column-title">PhoneNumber </span>
+            {{user.phoneNumber}}
+          </td>
+          <td style="width:14%%; min-width:10rem;">
+            <span class="p-column-title">Email </span>
+            {{user.email}}
+          </td>
+
+          <td>
+            <div class="flex">
+
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(user)" ></button>
+
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mr-2" (click)="deleteUser(user.id)" ></button>
+
+            </div>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+
+
+  <p-dialog [(visible)]="productDialog" [style]="{width: '850px'}" header="Edit User" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+      <div class="col-12 md:col-6 lg:col-12">
+      <div class="card px-6 py-6">
+        <!-- Default Basic Forms Start -->
+        <div class="grid p-fluid">
+          <div class="clearfix">
+            <div class="pull-left">
+              <h4 class="text-blue h4">Edit User</h4>
+            </div>
+          </div>
+          <form #addform="ngForm" (ngSubmit)="updateUser()" #f="ngForm" >
+            <div class="p-fluid p-formgrid grid">
+              <div class="field col-12 md:col-6"  *ngIf=user.firstName>
+                <label htmlFor="firstName">First Name:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input  type="text" pInputText class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName"  >
+                </div>
+              </div>
+              <div class="field col-12 md:col-6" *ngIf=user.lastName>
+                <label htmlFor="lastName">Last Name:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input pInputText class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName"  >
+                </div>
+              </div>
+              <div class="field col-12 md:col-6" *ngIf=user.phoneNumber>
+                <label htmlFor="PhoneNumber">Phone Number:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input  pInputText class="form-control"   type="tel" id="PhoneNumber" name="PhoneNumber"  pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}" [(ngModel)]="user.phoneNumber"  >
+                </div>
+              </div>
+              <div class="field col-12 md:col-6" *ngIf=user.email >
+                <label htmlFor="reg-email">Email:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input pInputText class="form-control" type="text"
+                         id="reg-email"
+                         name="email"  [(ngModel)]="user.email"  >
+                </div>
+              </div>
+
+
+              <div class="field col-12 md:col-6" *ngIf=user.password>
+                <label htmlFor="psw">password:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    pInputPassword
+                    class="form-control"
+                    type="password"
+                    id="psw" name="psw"
+                    placeholder="Enter Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required   [(ngModel)]="user.password"
+                  />
+                </div>
+
+                <br>
+                <div class="btn-list">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+<p-dialog [(visible)]="productDialogAdd" [style]="{width: '850px'}" header="Add User" [modal]="true" class="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="col-12 md:col-6 lg:col-12">
+      <div class="card px-6 py-6">
+        <!-- Default Basic Forms Start -->
+        <div class="grid p-fluid">
+          <div class="clearfix">
+            <div class="pull-left">
+              <h4 class="text-blue h4">Add User</h4>
+            </div>
+          </div>
+          <form #addform="ngForm" (ngSubmit)="saveUser(f)" #f="ngForm" >
+            <div class="p-fluid p-formgrid grid">
+              <div class="field col-12 md:col-6">
+                <select class="custom-select col-12" id="role" name="role" [(ngModel)]="role">
+                  <option *ngFor="let r of roles" [value]="r.id">{{ r.type }}</option>
+                </select>
+              </div>
+
+              <div class="field col-12 md:col-6">
+                <label htmlFor="firstName">First Name:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input  type="text" pInputText class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName"  >
+                </div>
+              </div>
+              <div class="field col-12 md:col-6">
+                <label htmlFor="lastName">Last Name:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input pInputText class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName"  >
+                </div>
+              </div>
+              <div class="field col-12 md:col-6">
+                <label htmlFor="PhoneNumber">Phone Number:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input  pInputText class="form-control"   type="tel" id="PhoneNumber" name="PhoneNumber"  pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}" [(ngModel)]="user.phoneNumber"  >
+                </div>
+              </div>
+
+              <div class="field col-12 md:col-6">
+                <label htmlFor="reg-email">Email:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input pInputText class="form-control" type="text"
+                         id="reg-email"
+                         name="email"  [(ngModel)]="user.email"  >
+                </div>
+              </div>
+
+              <div class="field col-12 md:col-6">
+                <label htmlFor="psw">password:</label>
+                <div class="col-sm-12 col-md-10">
+                  <input
+                    pInputPassword
+                    class="form-control"
+                    type="password"
+                    id="psw" name="psw"
+                    placeholder="Enter Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required   [(ngModel)]="user.password"
+                  />
+                </div>
+
+                <br>
+                <div class="btn-list">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+</div>
+</div>
+</div>

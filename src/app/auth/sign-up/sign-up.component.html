@@ -1,0 +1,32 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+      <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+        <div class="text-center mb-5">
+          <div class="text-900 text-3xl font-medium mb-3">Welcome !</div>
+          <span class="text-600 font-medium">Sign in to continue</span>
+        </div>
+
+        <form class="l-f-o__form" name="form" (ngSubmit)="signUp()"  #f="ngForm" novalidate  >
+          <label for="firstName" class="block text-900 text-xl font-medium mb-2">First Name</label>
+          <input [(ngModel)]="form.firstName" id="firstName" name="firstName" type="text" placeholder="your First Name" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+
+          <label for="lastName" class="block text-900 text-xl font-medium mb-2">Last Name</label>
+          <input [(ngModel)]="form.lastName" id="lastName" name="lastName" type="text" placeholder="your Last Name" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+
+          <label for="PhoneNumber" class="block text-900 text-xl font-medium mb-2">Phone Number</label>
+          <input [(ngModel)]="form.phoneNumber" id="PhoneNumber" name="PhoneNumber" type="text" placeholder="your Phone Number" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+
+          <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
+          <input [(ngModel)]="form.email" id="email" name="email" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+
+          <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
+          <p-password [(ngModel)]="form.password" id="password" name="password" placeholder="Password" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+
+
+          <button pButton pRipple label="Sign Up" type="submit" class="w-full p-3 text-xl"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
